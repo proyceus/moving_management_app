@@ -1,7 +1,7 @@
-const Home = () => {
+const Profile = () => {
     return (
         <p>We are home baby</p>
     )
 }
 
-export default Home;
+export default Profile;

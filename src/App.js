@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from 'react';
-import {AddInventoryPage, Home} from './Components';
+import {AddInventoryPage, Profile, InventoryPage} from './Components';
 import {Routes, Route, Link} from 'react-router-dom';
 
 
@@ -30,9 +30,10 @@ function App() {
       <nav className="navbar">
         <Link to="/" className="navlinks">Home</Link>
         <Link to="additem" className="navlinks">Add Items</Link>
+        <Link to="inventory" className="navlinks">My Inventory</Link>
       </nav>
       <Routes>
-        <Route path="/" element={ <Home /> } />
+        <Route path="/" element={ <Profile /> } />
         <Route path="/additem" element={
           <AddInventoryPage 
             setItem={setItem}
@@ -41,6 +42,7 @@ function App() {
             handleAddItem={handleAddItem}
            />
         } />
+        <Route path="/inventory" element={<InventoryPage items={itemList} />} />
       </Routes>
     </div>
   );

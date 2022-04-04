@@ -1,3 +1,5 @@
+import "./AddInventoryPage.css";
+
 const AddInventoryPage = ({setItem, setBox, items, handleAddItem}) => {
 
 
