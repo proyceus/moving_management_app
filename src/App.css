@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+/*My edits*/
+
+.navbar {
+  margin-bottom:20px;
+}
+
+.navlinks {
+  margin-left:5px;
+  margin-right: 5px;
+}
