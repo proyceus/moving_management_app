@@ -10,7 +10,11 @@ const InventoryPage = ({moveList}) => {
               <p>Filter:</p>
               <select name="moves" className="moveListDropdown">
                 <option value=""></option>
-                <option value="pierre">Pierre</option>
+                {moveList.map((item) => {
+                    return (
+                        <option value={item.name}>{item.name}</option>
+                    )
+                })}
               </select>
               </div>}
 

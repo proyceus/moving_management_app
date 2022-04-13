@@ -66,6 +66,7 @@ function App() {
             setBox={setBox}
             items={itemList}
             handleAddItem={handleAddItem}
+            moveList={moveList}
            />
         } />
         <Route path="/inventory" element={
