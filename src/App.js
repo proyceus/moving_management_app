@@ -68,7 +68,12 @@ function App() {
             handleAddItem={handleAddItem}
            />
         } />
-        <Route path="/inventory" element={<InventoryPage items={itemList} />} />
+        <Route path="/inventory" element={
+          <InventoryPage 
+            items={itemList}
+            moveList={moveList} 
+            />
+          } />
       </Routes>
     </div>
   );
