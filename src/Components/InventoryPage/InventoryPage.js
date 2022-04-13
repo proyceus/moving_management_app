@@ -1,6 +1,6 @@
 import "./InventoryPage.css";
 
-const InventoryPage = ({moveList}) => {
+const InventoryPage = ({moveList, itemList}) => {
 
     return (
         <div className="inventoryPage">
@@ -25,6 +25,16 @@ const InventoryPage = ({moveList}) => {
                         <th>Item name</th>
                         <th>Box number</th>
                     </tr>
+                    {itemList && 
+                          itemList.map((item) => {
+                              return (
+                                  <tr>
+                                      <td>{item.moveName}</td>
+                                      <td>{item.name}</td>
+                                      <td>{item.boxNumber}</td>
+                                  </tr>
+                              )
+                    })}
                 </table>
             </div>
         </div>

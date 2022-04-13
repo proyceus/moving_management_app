@@ -1,6 +1,6 @@
 import "./Profile.css";
 
-const Profile = ({setMoveName, setMoveDate, handleAddMove, moveList}) => {
+const Profile = ({setMoveName, setMoveDate, handleAddMove, moveList, itemList}) => {
     return (
         <div className="profilePage">
             <div className="profileTitle">
@@ -8,7 +8,7 @@ const Profile = ({setMoveName, setMoveDate, handleAddMove, moveList}) => {
               <div className="userInfo">
                 <p>Welcome back, User</p>
                 <div className="userData">
-                  <p>Current items in inventory: 0</p>
+                  <p>Current items in inventory: {itemList.length}</p>
                   <p>Current number of boxes: 0</p>
                 </div>
               </div>

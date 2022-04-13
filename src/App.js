@@ -20,7 +20,9 @@ function App() {
 
     const itemInfo = {
       name: item,
-      boxNumber: box
+      boxNumber: box,
+      moveName: moveName,
+      dateAdded: Date()
     }
 
     setItemList((prevState) => 
@@ -58,6 +60,7 @@ function App() {
             setMoveDate={setMoveDate}
             handleAddMove={handleAddMove}
             moveList={moveList}
+            itemList={itemList}
            /> 
         } />
         <Route path="/additem" element={
@@ -67,11 +70,13 @@ function App() {
             items={itemList}
             handleAddItem={handleAddItem}
             moveList={moveList}
+            setMoveName={setMoveName}
+            moveName={moveName}
            />
         } />
         <Route path="/inventory" element={
           <InventoryPage 
-            items={itemList}
+            itemList={itemList}
             moveList={moveList} 
             />
           } />
