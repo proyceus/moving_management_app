@@ -1,6 +1,69 @@
-const Profile = () => {
+import "./Profile.css";
+
+const Profile = ({setMoveName, setMoveDate, handleAddMove, moveList}) => {
     return (
-        <p>We are home baby</p>
+        <div className="profilePage">
+            <div className="profileTitle">
+              <h1 className="profileTitle">Profile Page</h1>
+              <div className="userInfo">
+                <p>Welcome back, User</p>
+                <div className="userData">
+                  <p>Current items in inventory: 0</p>
+                  <p>Current number of boxes: 0</p>
+                </div>
+              </div>
+            </div>
+            <div className="recentAdd">
+                <h1 className="recentAddTitle">Recently added items</h1>
+                <div className="recentsTable">
+                    <table>
+                        <tr>
+                            <th>Move</th>
+                            <th>Item</th>
+                            <th>Box #</th>  
+                        </tr>
+                        <tr>
+                            <td>Royce's</td>
+                            <td>Chair</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div className="createMove">
+                <h1 className="createMoveTitle">Create a move</h1>
+                <div className="createMoveInfo">
+                    <p>Move name:</p>
+                    <input type="text" onChange={(e) => {setMoveName(e.target.value)}}></input>
+                    <p>Date of move (MM/DD/YYYY):</p>
+                    <input type="text" onChange={(e) => {setMoveDate(e.target.value)}}></input>
+                    <br />
+                    <button type="submit" className="moveSubmit" onClick={handleAddMove}>Submit</button>
+                </div>
+            </div>
+            <div className="moveList">
+                <h1 className="moveListTitle">Move list</h1>
+                <div className="moveListTable">
+                    <table>
+                        <tr>
+                            <th>Move name</th>
+                            <th>Date</th>
+                            <th># of current boxes</th>
+                        </tr>
+                        {moveList && 
+                          moveList.map((item) => {
+                              return (
+                                  <tr>
+                                      <td>{item.name}</td>
+                                      <td>{item.date}</td>
+                                      <td>**placeholder for boxes</td>
+                                  </tr>
+                              )
+                          })}
+                    </table>
+                </div>
+            </div>
+        </div>
     )
 }
 
