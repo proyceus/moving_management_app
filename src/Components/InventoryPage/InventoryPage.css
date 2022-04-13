@@ -21,3 +21,18 @@
 .inventoryTable tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.inventoryFilter {
+    margin-left: 20px;
+    display: flex;
+    align-items:center;
+}
+
+.inventoryFilter p {
+    margin-right: 5px;
+}
+
+.moveListDropdown {
+    height: 30px;
+    width: 150px;
+}

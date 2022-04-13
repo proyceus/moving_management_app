@@ -9,7 +9,7 @@ const InventoryPage = ({moveList}) => {
               <div className="inventoryFilter">
               <p>Filter:</p>
               <select name="moves" className="moveListDropdown">
-                <option value="royce">Royce</option>
+                <option value=""></option>
                 <option value="pierre">Pierre</option>
               </select>
               </div>}
