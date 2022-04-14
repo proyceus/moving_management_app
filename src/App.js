@@ -74,6 +74,8 @@ function App() {
         </div>
       </nav>
       <Routes>
+        {isLoggedIn ? 
+        <>
         <Route path="/" element={ 
           <Profile
             setMoveName={setMoveName}
@@ -100,8 +102,13 @@ function App() {
             moveList={moveList} 
             />
           } />
+          </>
+          :
+          <>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        </>
+        }
       </Routes>
     </div>
   );
