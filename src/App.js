@@ -1,6 +1,6 @@
 import './App.css';
 import {useState} from 'react';
-import {AddInventoryPage, Profile, InventoryPage} from './Components';
+import {AddInventoryPage, Profile, InventoryPage, LoginPage, SignupPage} from './Components';
 import {Routes, Route, Link} from 'react-router-dom';
 import logo from './images/Moova.png';
 
@@ -13,6 +13,8 @@ function App() {
   const [moveName, setMoveName] = useState('');
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 
   const handleAddItem = (e) => {
@@ -43,14 +45,32 @@ function App() {
     )
   }
 
+  const toggleLogin = () => {
+    if (isLoggedIn === true) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }
+
   return (
     <div className="App">
       <nav className="navbar">
         <img src={logo} alt="logo" className="logo"></img>
         <div className="navbarlinks">
+          {isLoggedIn ?
+          <>
           <Link to="/" className="navlinks">Home</Link>
           <Link to="additem" className="navlinks">Add Items</Link>
           <Link to="inventory" className="navlinks">My Inventory</Link>
+          </>
+          :
+          <>
+          <Link to="login" className="navlinks">Login</Link>
+          <Link to="signup" className="navlinks">Sign Up</Link>
+          </>
+        }
+          <button onClick={toggleLogin}>Toggle</button>
         </div>
       </nav>
       <Routes>
@@ -80,6 +100,8 @@ function App() {
             moveList={moveList} 
             />
           } />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </div>
   );
