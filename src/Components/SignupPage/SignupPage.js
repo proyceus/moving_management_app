@@ -1,16 +1,41 @@
 import "./SignupPage.css";
 
-const SignupPage = () => {
+const SignupPage = ({switchToLogin}) => {
     return (
-        <div className="signupPage">
-            <h1>Sign up here</h1>
+        <>
+        <div className="loginWrapper">
+            <h1>Please log in</h1>
+            <form>
+              <label>
+                <p>Username</p>
+                <input type="text" />
+              </label>
+              <label>
+                <p>Password</p>
+                <input type="password" />
+              </label>
+              <div>
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+        </div>
+        <div className="signupWrapper">
+        <h1>Please sign up</h1>
+        <form>
+          <label>
             <p>Username</p>
             <input type="text" />
+          </label>
+          <label>
             <p>Password</p>
-            <input type="text" />
-            <br />
+            <input type="password" />
+          </label>
+          <div>
             <button type="submit">Submit</button>
-        </div>
+          </div>
+        </form>
+    </div>
+    </>
     )
 }
 

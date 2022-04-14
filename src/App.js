@@ -53,6 +53,11 @@ function App() {
     }
   }
 
+
+  if (!isLoggedIn) {
+    return <SignupPage />
+  }
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -73,9 +78,8 @@ function App() {
           <button onClick={toggleLogin}>Toggle</button>
         </div>
       </nav>
+
       <Routes>
-        {isLoggedIn ? 
-        <>
         <Route path="/" element={ 
           <Profile
             setMoveName={setMoveName}
@@ -102,13 +106,6 @@ function App() {
             moveList={moveList} 
             />
           } />
-          </>
-          :
-          <>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        </>
-        }
       </Routes>
     </div>
   );
