@@ -9,16 +9,17 @@ import {
 } from "./Components";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
+import useToken from "./useToken";
 
-const setToken = (userToken) => {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-}
+// const setToken = (userToken) => {
+//   sessionStorage.setItem('token', JSON.stringify(userToken))
+// }
 
-const getToken = () => {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token;
-}
+// const getToken = () => {
+//   const tokenString = sessionStorage.getItem('token');
+//   const userToken = JSON.parse(tokenString);
+//   return userToken?.token;
+// }
 
 function App() {
   const [itemList, setItemList] = useState([]);
@@ -28,7 +29,7 @@ function App() {
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState("");
 
-  const token = getToken();
+  const {token, setToken} = useToken();
 
 
 
@@ -57,7 +58,7 @@ function App() {
   };
 
   if (!token) {
-    return <LoginPage setToken={setToken} />;
+    return <LoginPage setToken={setToken} token={token} />;
   }
 
   return (
@@ -76,6 +77,7 @@ function App() {
               <Link to="inventory" className="navlinks">
                 My Inventory
               </Link>
+              <button type="submit" onClick={() => console.log(token)}>Clicky</button>
             </>
           ) : (
             <>

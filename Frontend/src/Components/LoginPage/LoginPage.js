@@ -14,7 +14,7 @@ const loginUser = async (credentials) => {
 }
 
 
-const LoginPage = ({setToken}) => {
+const LoginPage = ({setToken, token}) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -24,11 +24,13 @@ const LoginPage = ({setToken}) => {
       username,
       password
     });
+    console.log(token);
     setToken(token);
   }
 
     return (
         <div className="loginWrapper">
+           <button type="submit" onClick={() => console.log(token)}>Clicky</button>
             <h1>Please log in</h1>
             <form onSubmit={handleSubmit}>
               <label>
@@ -43,6 +45,7 @@ const LoginPage = ({setToken}) => {
                 <button type="submit">Submit</button>
               </div>
             </form>
+            {token}
         </div>
     
     )
