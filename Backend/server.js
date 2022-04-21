@@ -3,11 +3,11 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded());
 
 app.use('/login', (req, res) => {
-    res.send({
-        token: 'test123',
-    })
+    res.send(req.body)
 });
 
 

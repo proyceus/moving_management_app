@@ -10,6 +10,16 @@ import {
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
 
+const setToken = (userToken) => {
+  sessionStorage.setItem('token', JSON.stringify(userToken));
+}
+
+const getToken = () => {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token;
+}
+
 function App() {
   const [itemList, setItemList] = useState([]);
   const [item, setItem] = useState("");
@@ -17,10 +27,10 @@ function App() {
   const [moveName, setMoveName] = useState("");
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState("");
-  const [token, setToken] = useState();
 
-  //can remove this later
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = getToken();
+
+
 
   const handleAddItem = (e) => {
     e.preventDefault();
@@ -44,14 +54,6 @@ function App() {
     };
 
     setMoveList((prevState) => [...prevState, moveInfo]);
-  };
-
-  const toggleLogin = () => {
-    if (token) {
-      setToken();
-    } else {
-      setToken({username: "Pierre", password: "Test1"})
-    }
   };
 
   if (!token) {
@@ -85,7 +87,6 @@ function App() {
               </Link>
             </>
           )}
-          <button onClick={toggleLogin}>Toggle</button>
         </div>
       </nav>
 
