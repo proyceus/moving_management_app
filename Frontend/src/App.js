@@ -47,15 +47,15 @@ function App() {
   };
 
   const toggleLogin = () => {
-    if (isLoggedIn === true) {
-      setIsLoggedIn(false);
+    if (token) {
+      setToken();
     } else {
-      setIsLoggedIn(true);
+      setToken({username: "Pierre", password: "Test1"})
     }
   };
 
   if (!token) {
-    return <SignupPage setToken={setToken} />;
+    return <LoginPage setToken={setToken} />;
   }
 
   return (
@@ -63,7 +63,7 @@ function App() {
       <nav className="navbar">
         <img src={logo} alt="logo" className="logo"></img>
         <div className="navbarlinks">
-          {isLoggedIn ? (
+          {token ? (
             <>
               <Link to="/" className="navlinks">
                 Home
