@@ -45,7 +45,6 @@ const LoginPage = ({setToken, token}) => {
                 <button type="submit">Submit</button>
               </div>
             </form>
-            {token}
         </div>
     
     )
