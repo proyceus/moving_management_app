@@ -35,7 +35,7 @@ User.set("toJSON", {
     }
 });
 
-User.plougin(passportLocalMongoose);
+User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", User);
 

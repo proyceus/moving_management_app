@@ -20,6 +20,11 @@ mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
 .catch(err => console.error(err));
 
 
+require("./strategies/JwtStrategy");
+require("./strategies/LocalStrategy");
+require("./authenticate");
+
+
 // Connect and configure Express
 const app = express();
 
@@ -37,10 +42,9 @@ app.use(session({
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./passportConfig')(passport);
 
 // Import Express routes
-require('./routes')(app);
+require('./routes/userRoutes')(app);
 
 
 // Start Express Server
