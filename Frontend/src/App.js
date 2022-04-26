@@ -5,20 +5,9 @@ import {
   Profile,
   InventoryPage,
   LoginPage,
-  SignupPage,
 } from "./Components";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
-
-// const setToken = (userToken) => {
-//   sessionStorage.setItem('token', JSON.stringify(userToken))
-// }
-
-// const getToken = () => {
-//   const tokenString = sessionStorage.getItem('token');
-//   const userToken = JSON.parse(tokenString);
-//   return userToken?.token;
-// }
 
 function App() {
   const [itemList, setItemList] = useState([]);
@@ -56,7 +45,7 @@ function App() {
     setMoveList((prevState) => [...prevState, moveInfo]);
   };
 
-  if (!token) {
+  if (!userToken) {
     return <LoginPage userToken={userToken} setUserToken={setUserToken} />;
   }
 
@@ -65,7 +54,7 @@ function App() {
       <nav className="navbar">
         <img src={logo} alt="logo" className="logo"></img>
         <div className="navbarlinks">
-          {token ? (
+          {userToken ? (
             <>
               <Link to="/" className="navlinks">
                 Home
@@ -76,7 +65,7 @@ function App() {
               <Link to="inventory" className="navlinks">
                 My Inventory
               </Link>
-              <button type="submit" onClick={() => console.log(token)}>Clicky</button>
+              <button type="submit" onClick={() => console.log(userToken)}>Clicky</button>
             </>
           ) : (
             <>
