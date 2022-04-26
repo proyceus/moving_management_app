@@ -1,6 +1,5 @@
 const passport = require("passport");
 const User = require("../user");
-const bcrypt = require("bcryptjs");
 const { getToken, COOKIE_OPTIONS, getRefreshToken } = require("../authenticate");
 
 module.exports = function (app) {
@@ -29,7 +28,54 @@ module.exports = function (app) {
         }
       }
     )
+  });
 
+  app.post("/login", passport.authenticate("local"), (req, res, next) => {
+    const token = getToken({_id: req.user._id});
+    const refreshToken = getRefreshToken({_id: req.user._id});
+    User.findById(req.user._id).then(
+      user => {
+        user.refreshToken.push({refreshToken});
+        user.save((err, user) => {
+          if (err) {
+            res.statusCode = 500;
+            res.send(err)
+          } else {
+            res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
+            res.send({success: true, token})
+          }
+        })
+      },
+      err => next(err)
+    )
+  });
+
+  app.get("logout", verifyUser, (req, res, next) => {
+    const {signedCookies = {}} = req;
+    const {refreshToken} = signedCookies;
+
+    User.findById(req.user._id).then(
+      user => {
+        const tokenIndex = user.refreshToken.findIndex(
+          item => item.refreshToken === refreshToken
+        )
+
+        if (tokenIndex !== -1) {
+          user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove();
+        }
+
+        user.save((err, user) => {
+          if (err) {
+            res.statusCode = 500;
+            res.send(err);
+          } else {
+            res.clearCookie("refreshToken", COOKIE_OPTIONS);
+            res.send({success: true})
+          }
+        })
+      },
+      err => next(err)
+    )
   });
   
 };

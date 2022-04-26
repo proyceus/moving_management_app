@@ -9,7 +9,6 @@ import {
 } from "./Components";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
-import useToken from "./useToken";
 
 // const setToken = (userToken) => {
 //   sessionStorage.setItem('token', JSON.stringify(userToken))
@@ -29,7 +28,7 @@ function App() {
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState("");
 
-  const {token, setToken} = useToken();
+  const [userToken, setUserToken] = useState();
 
 
 
@@ -58,7 +57,7 @@ function App() {
   };
 
   if (!token) {
-    return <LoginPage setToken={setToken} token={token} />;
+    return <LoginPage userToken={userToken} setUserToken={setUserToken} />;
   }
 
   return (
