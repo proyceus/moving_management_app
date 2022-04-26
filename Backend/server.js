@@ -30,18 +30,11 @@ const app = express();
 
 
 app.use(bodyParser.json());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
 
-app.use(session({
-  secret: "secretcode",
-  resave: true,
-  saveUninitialized: true
-}));
-
-app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
-app.use(passport.session());
 
 // Import Express routes
 require('./routes/userRoutes')(app);

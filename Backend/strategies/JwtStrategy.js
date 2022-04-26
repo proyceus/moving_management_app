@@ -13,6 +13,7 @@ passport.use(
         //Check against the DB only if necessary
         User.findOne({_id: jwt_payload._id}, function(err, user) {
             if (err) {
+                console.log("FOUND ME")
                 return done(err, false);
             }
             if (user) {
