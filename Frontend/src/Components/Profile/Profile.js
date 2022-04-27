@@ -1,4 +1,5 @@
 import "./Profile.css";
+import {useEffect} from "react";
 
 const Profile = ({
   setMoveName,
@@ -6,13 +7,19 @@ const Profile = ({
   handleAddMove,
   moveList,
   itemList,
+  userProfile,
+  searchUser
 }) => {
+
+  useEffect(() => {
+    searchUser();
+  })
   return (
     <div className="profilePage">
       <div className="profileTitle">
         <h1 className="profileTitle">Profile Page</h1>
         <div className="userInfo">
-          <p>Welcome back, User</p>
+          <p>Welcome back, {userProfile && userProfile.username}</p>
           <div className="userData">
             <p>Current items in inventory: {itemList.length}</p>
             <p>Current number of boxes: 0</p>

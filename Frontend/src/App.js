@@ -56,6 +56,19 @@ function App() {
     setMoveList((prevState) => [...prevState, moveInfo]);
   };
 
+  const handleLogoutSubmit = async () => {
+    await fetch("http://localhost:3001/logout", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${userToken.token}`,
+      },
+    })
+      .then((data) => data.json());
+
+    setUserProfile({});
+    setUserToken({});
+  }
+
   if (userToken.token && userToken.token.length > 1) {
     searchUser();
   }
@@ -83,6 +96,7 @@ function App() {
               <button type="submit" onClick={() => console.log(userToken)}>Clicky</button>
               <button type="submit" onClick={() => console.log(userProfile)}>Profile</button>
               <button type="submit" onClick={searchUser}>Search</button>
+              <button type="submit" onClick={handleLogoutSubmit}>Logout</button>
             </>
           ) : (
             <>
@@ -107,6 +121,8 @@ function App() {
               handleAddMove={handleAddMove}
               moveList={moveList}
               itemList={itemList}
+              userProfile={userProfile}
+              searchUser={searchUser}
             />
           }
         />
