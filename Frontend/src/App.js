@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddInventoryPage,
   Profile,
@@ -17,10 +17,21 @@ function App() {
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState("");
 
-  const [userToken, setUserToken] = useState();
+  const [userToken, setUserToken] = useState({});
 
+  const [userProfile, setUserProfile] = useState();
 
-
+  const searchUser = async () => {
+    await fetch("http://localhost:3001/me", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${userToken.token}`,
+      },
+    })
+      .then((data) => data.json())
+      .then((profile) => setUserProfile(profile));
+  };
+  
   const handleAddItem = (e) => {
     e.preventDefault();
 
@@ -45,8 +56,12 @@ function App() {
     setMoveList((prevState) => [...prevState, moveInfo]);
   };
 
-  if (!userToken) {
-    return <LoginPage userToken={userToken} setUserToken={setUserToken} />;
+  if (userToken.token && userToken.token.length > 1) {
+    searchUser();
+  }
+
+  if (!userToken.token) {
+    return <LoginPage userToken={userToken} setUserToken={setUserToken} searchUser={searchUser} />;
   }
 
   return (
@@ -66,6 +81,8 @@ function App() {
                 My Inventory
               </Link>
               <button type="submit" onClick={() => console.log(userToken)}>Clicky</button>
+              <button type="submit" onClick={() => console.log(userProfile)}>Profile</button>
+              <button type="submit" onClick={searchUser}>Search</button>
             </>
           ) : (
             <>
