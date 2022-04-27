@@ -88,7 +88,7 @@ module.exports = function (app) {
   });
 
   app.post("/addmove", (req, res, next) => {
-    User.findById(req.user._id).then(
+    User.findById(req.body._id).then(
       (user) => {
         const move = {
           name: req.body.moveName,

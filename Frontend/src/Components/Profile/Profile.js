@@ -11,9 +11,6 @@ const Profile = ({
   searchUser
 }) => {
 
-  useEffect(() => {
-    searchUser();
-  })
   return (
     <div className="profilePage">
       <div className="profileTitle">

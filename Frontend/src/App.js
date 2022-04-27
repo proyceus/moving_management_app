@@ -46,7 +46,13 @@ function App() {
     setItemList((prevState) => [...prevState, itemInfo]);
   };
 
-  const handleAddMove = async (moveInfo) => {
+  const handleAddMove = async () => {
+    const moveInfo = {
+      moveName,
+      moveDate,
+      _id: userProfile._id
+    }
+
     await fetch("http://localhost:3001/addmove", {
       method: "POST",
       headers: {
@@ -68,12 +74,11 @@ function App() {
     setUserToken({});
   };
 
-  //figure out way to get user info into state on login
-  // useEffect(() => {
-  //   if (userToken.token && userToken.token.length > 1) {
-  //     searchUser();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userToken.token && userToken.token.length > 1) {
+      searchUser();
+    }
+  }, []);
 
   if (!userToken.token) {
     return (
