@@ -87,6 +87,33 @@ module.exports = function (app) {
     );
   });
 
+  app.post("/addmove", (req, res, next) => {
+    User.findById(req.user._id).then(
+      (user) => {
+        const move = {
+          name: req.body.moveName,
+          moveDate: req.body.moveDate,
+          boxNumberTotal: 0,
+          boxes: [{
+            boxNumber: 0,
+            items: []
+          }]
+        }
+        user.move.push(move)
+
+        user.save((err, user) => {
+          if (err) {
+            res.statusCode = 500;
+            res.send(err);
+          } else {
+            res.send({success: true})
+          }
+        })
+      },
+      (err) => next(err)
+    )
+  });
+
   app.post("/refreshToken", (req, res, next) => {
     const { signedCookies = {} } = req;
     const { refreshToken } = signedCookies;

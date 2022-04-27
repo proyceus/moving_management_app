@@ -22,16 +22,17 @@ function App() {
   const [userProfile, setUserProfile] = useState();
 
   const searchUser = async () => {
+    console.log("searched");
     await fetch("http://localhost:3001/me", {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${userToken.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
     })
       .then((data) => data.json())
       .then((profile) => setUserProfile(profile));
   };
-  
+
   const handleAddItem = (e) => {
     e.preventDefault();
 
@@ -45,36 +46,43 @@ function App() {
     setItemList((prevState) => [...prevState, itemInfo]);
   };
 
-  const handleAddMove = (e) => {
-    e.preventDefault();
-
-    const moveInfo = {
-      name: moveName,
-      date: moveDate,
-    };
-
-    setMoveList((prevState) => [...prevState, moveInfo]);
+  const handleAddMove = async (moveInfo) => {
+    await fetch("http://localhost:3001/addmove", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(moveInfo),
+    }).then((data) => data.json());
   };
 
   const handleLogoutSubmit = async () => {
     await fetch("http://localhost:3001/logout", {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${userToken.token}`,
+        Authorization: `Bearer ${userToken.token}`,
       },
-    })
-      .then((data) => data.json());
+    }).then((data) => data.json());
 
     setUserProfile({});
     setUserToken({});
-  }
+  };
 
-  if (userToken.token && userToken.token.length > 1) {
-    searchUser();
-  }
+  //figure out way to get user info into state on login
+  // useEffect(() => {
+  //   if (userToken.token && userToken.token.length > 1) {
+  //     searchUser();
+  //   }
+  // }, []);
 
   if (!userToken.token) {
-    return <LoginPage userToken={userToken} setUserToken={setUserToken} searchUser={searchUser} />;
+    return (
+      <LoginPage
+        userToken={userToken}
+        setUserToken={setUserToken}
+        searchUser={searchUser}
+      />
+    );
   }
 
   return (
@@ -93,10 +101,18 @@ function App() {
               <Link to="inventory" className="navlinks">
                 My Inventory
               </Link>
-              <button type="submit" onClick={() => console.log(userToken)}>Clicky</button>
-              <button type="submit" onClick={() => console.log(userProfile)}>Profile</button>
-              <button type="submit" onClick={searchUser}>Search</button>
-              <button type="submit" onClick={handleLogoutSubmit}>Logout</button>
+              <button type="submit" onClick={() => console.log(userToken)}>
+                Clicky
+              </button>
+              <button type="submit" onClick={() => console.log(userProfile)}>
+                Profile
+              </button>
+              <button type="submit" onClick={searchUser}>
+                Search
+              </button>
+              <button type="submit" onClick={handleLogoutSubmit}>
+                Logout
+              </button>
             </>
           ) : (
             <>

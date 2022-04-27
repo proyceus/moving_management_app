@@ -14,7 +14,9 @@ const LoginPage = ({ setUserToken, userToken, searchUser }) => {
       body: JSON.stringify(credentials),
     })
       .then((data) => data.json())
-      .then((items) => setUserToken(items))
+      .then((items) => {
+        setUserToken(items);
+      })
   };
 
   const signUpUser = async (credentials) => {

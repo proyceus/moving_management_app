@@ -15,7 +15,7 @@ const User = new Schema ({
     move: [{
         name: String,
         moveDate: Date,
-        boxNumberTotal: Number,
+        boxNumberTotal: {type: Number, default: 0},
         boxes: [{
             boxNumber: Number,
             items: [{
