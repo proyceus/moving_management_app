@@ -50,6 +50,7 @@ function App() {
     const moveInfo = {
       moveName,
       moveDate,
+      //stuck here, the program isn't moving the user info into state right after login for some reason...need to fix this
       _id: userProfile._id
     }
 
