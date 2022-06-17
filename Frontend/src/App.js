@@ -30,7 +30,10 @@ function App() {
       },
     })
       .then((data) => data.json())
-      .then((profile) => setUserProfile(profile));
+      .then((profile) => {
+        setUserProfile(profile);
+        setMoveList(profile.move);
+      });
   };
 
   const handleAddItem = (e) => {
@@ -48,11 +51,12 @@ function App() {
 
   const handleAddMove = async () => {
     const moveInfo = {
-      moveName,
+      name: moveName,
       moveDate,
-      //stuck here, the program isn't moving the user info into state right after login for some reason...need to fix this
-      _id: userProfile._id
-    }
+      _id: userProfile._id,
+    };
+
+    setMoveList((original) => [...original, moveInfo]);
 
     await fetch("http://localhost:3001/addmove", {
       method: "POST",
@@ -76,10 +80,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (userToken.token && userToken.token.length > 1) {
-      searchUser();
-    }
-  }, []);
+    searchUser();
+  }, [userToken]);
 
   if (!userToken.token) {
     return (
@@ -110,11 +112,17 @@ function App() {
               <button type="submit" onClick={() => console.log(userToken)}>
                 Clicky
               </button>
-              <button type="submit" onClick={() => console.log(userProfile)}>
+              <button
+                type="submit"
+                onClick={() => console.log(userProfile.move)}
+              >
                 Profile
               </button>
               <button type="submit" onClick={searchUser}>
                 Search
+              </button>
+              <button type="submit" onClick={() => console.log(moveList)}>
+                Move List
               </button>
               <button type="submit" onClick={handleLogoutSubmit}>
                 Logout

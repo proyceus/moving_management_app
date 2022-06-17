@@ -16,7 +16,7 @@ const LoginPage = ({ setUserToken, userToken, searchUser }) => {
       .then((data) => data.json())
       .then((items) => {
         setUserToken(items);
-      })
+      });
   };
 
   const signUpUser = async (credentials) => {
@@ -94,6 +94,5 @@ const LoginPage = ({ setUserToken, userToken, searchUser }) => {
     </>
   );
 };
-
 
 export default LoginPage;

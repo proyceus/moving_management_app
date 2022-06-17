@@ -1,5 +1,5 @@
 import "./Profile.css";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 const Profile = ({
   setMoveName,
@@ -8,9 +8,8 @@ const Profile = ({
   moveList,
   itemList,
   userProfile,
-  searchUser
+  searchUser,
 }) => {
-
   return (
     <div className="profilePage">
       <div className="profileTitle">
@@ -84,7 +83,7 @@ const Profile = ({
                   return (
                     <tr>
                       <td>{item.name}</td>
-                      <td>{item.date}</td>
+                      <td>{item.moveDate}</td>
                       <td>**placeholder for boxes</td>
                     </tr>
                   );
