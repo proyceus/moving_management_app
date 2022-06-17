@@ -16,7 +16,7 @@ function App() {
   const [moveName, setMoveName] = useState("");
   const [moveList, setMoveList] = useState([]);
   const [moveDate, setMoveDate] = useState("");
-
+  const [accountTotalBoxes, setAccountTotalBoxes] = useState(0);
   const [userToken, setUserToken] = useState({});
 
   const [userProfile, setUserProfile] = useState();
@@ -54,6 +54,7 @@ function App() {
       name: moveName,
       moveDate,
       _id: userProfile._id,
+      boxNumberTotal: 1,
     };
 
     setMoveList((original) => [...original, moveInfo]);
@@ -82,6 +83,16 @@ function App() {
   useEffect(() => {
     searchUser();
   }, [userToken]);
+
+  // useEffect(() => {
+  //   let totalBoxes = 0;
+
+  //   for (let i = 0; i < userProfile.move.length; i++) {
+  //     totalBoxes = totalBoxes + userProfile.move[i].totalBoxNumber;
+  //   }
+
+  //   setAccountTotalBoxes(totalBoxes);
+  // }, [userProfile]);
 
   if (!userToken.token) {
     return (
@@ -112,10 +123,7 @@ function App() {
               <button type="submit" onClick={() => console.log(userToken)}>
                 Clicky
               </button>
-              <button
-                type="submit"
-                onClick={() => console.log(userProfile.move)}
-              >
+              <button type="submit" onClick={() => console.log(userProfile)}>
                 Profile
               </button>
               <button type="submit" onClick={searchUser}>
@@ -153,6 +161,7 @@ function App() {
               itemList={itemList}
               userProfile={userProfile}
               searchUser={searchUser}
+              accountTotalBoxes={accountTotalBoxes}
             />
           }
         />

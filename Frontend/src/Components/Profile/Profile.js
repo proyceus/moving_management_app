@@ -9,6 +9,7 @@ const Profile = ({
   itemList,
   userProfile,
   searchUser,
+  accountTotalBoxes,
 }) => {
   return (
     <div className="profilePage">
@@ -18,7 +19,7 @@ const Profile = ({
           <p>Welcome back, {userProfile && userProfile.username}</p>
           <div className="userData">
             <p>Current items in inventory: {itemList.length}</p>
-            <p>Current number of boxes: 0</p>
+            <p>Current number of boxes: {accountTotalBoxes}</p>
           </div>
         </div>
       </div>
@@ -84,7 +85,7 @@ const Profile = ({
                     <tr>
                       <td>{item.name}</td>
                       <td>{item.moveDate}</td>
-                      <td>**placeholder for boxes</td>
+                      <td>{item.boxNumberTotal}</td>
                     </tr>
                   );
                 })}
