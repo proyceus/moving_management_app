@@ -91,27 +91,29 @@ module.exports = function (app) {
     User.findById(req.body._id).then(
       (user) => {
         const move = {
-          name: req.body.moveName,
+          name: req.body.name,
           moveDate: req.body.moveDate,
-          boxNumberTotal: 0,
-          boxes: [{
-            boxNumber: 0,
-            items: []
-          }]
-        }
-        user.move.push(move)
+          boxNumberTotal: 1,
+          boxes: [
+            {
+              boxNumber: 1,
+              items: [],
+            },
+          ],
+        };
+        user.move.push(move);
 
         user.save((err, user) => {
           if (err) {
             res.statusCode = 500;
             res.send(err);
           } else {
-            res.send({success: true})
+            res.send({ success: true });
           }
-        })
+        });
       },
       (err) => next(err)
-    )
+    );
   });
 
   app.post("/refreshToken", (req, res, next) => {
