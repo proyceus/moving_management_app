@@ -84,6 +84,7 @@ function App() {
     searchUser();
   }, [userToken]);
 
+  /*need to fix this area so that the number of totalBoxes shows up*/
   // useEffect(() => {
   //   let totalBoxes = 0;
 

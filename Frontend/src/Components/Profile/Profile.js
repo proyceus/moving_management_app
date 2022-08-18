@@ -82,9 +82,9 @@ const Profile = ({
               {moveList &&
                 moveList.map((item) => {
                   return (
-                    <tr>
+                    <tr key={item.name}>
                       <td>{item.name}</td>
-                      <td>{item.moveDate}</td>
+                      <td>{new Date(item.moveDate).toLocaleDateString()}</td>
                       <td>{item.boxNumberTotal}</td>
                     </tr>
                   );

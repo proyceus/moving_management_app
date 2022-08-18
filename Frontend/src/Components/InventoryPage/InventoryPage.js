@@ -10,7 +10,11 @@ const InventoryPage = ({ moveList, itemList }) => {
           <select name="moves" className="moveListDropdown">
             <option value=""></option>
             {moveList.map((item) => {
-              return <option value={item.name}>{item.name}</option>;
+              return (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              );
             })}
           </select>
         </div>
@@ -29,7 +33,7 @@ const InventoryPage = ({ moveList, itemList }) => {
             {itemList &&
               itemList.map((item) => {
                 return (
-                  <tr>
+                  <tr key={item.name}>
                     <td>{item.moveName}</td>
                     <td>{item.name}</td>
                     <td>{item.boxNumber}</td>
