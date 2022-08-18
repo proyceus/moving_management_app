@@ -1,13 +1,21 @@
 import "./InventoryPage.css";
+import { useState } from "react";
 
 const InventoryPage = ({ moveList, itemList }) => {
+  const [filteredSelect, setFilteredSelect] = useState("");
   return (
     <div className="inventoryPage">
       <h1>My Inventory</h1>
       {moveList.length > 1 && (
         <div className="inventoryFilter">
           <p>Filter:</p>
-          <select name="moves" className="moveListDropdown">
+          <select
+            name="moves"
+            className="moveListDropdown"
+            onChange={(e) => {
+              setFilteredSelect(e.target.value);
+            }}
+          >
             <option value=""></option>
             {moveList.map((item) => {
               return (
@@ -30,16 +38,28 @@ const InventoryPage = ({ moveList, itemList }) => {
             </tr>
           </thead>
           <tbody>
-            {itemList &&
-              itemList.map((item) => {
-                return (
-                  <tr key={item._id}>
-                    <td>{item.moveName}</td>
-                    <td>{item.itemName}</td>
-                    <td>{item.boxNumber}</td>
-                  </tr>
-                );
-              })}
+            {filteredSelect === ""
+              ? itemList &&
+                itemList.map((item) => {
+                  return (
+                    <tr key={item._id}>
+                      <td>{item.moveName}</td>
+                      <td>{item.itemName}</td>
+                      <td>{item.boxNumber}</td>
+                    </tr>
+                  );
+                })
+              : itemList
+                  .filter((word) => word.moveName === filteredSelect)
+                  .map((item) => {
+                    return (
+                      <tr key={item._id}>
+                        <td>{item.moveName}</td>
+                        <td>{item.itemName}</td>
+                        <td>{item.boxNumber}</td>
+                      </tr>
+                    );
+                  })}
           </tbody>
         </table>
       </div>

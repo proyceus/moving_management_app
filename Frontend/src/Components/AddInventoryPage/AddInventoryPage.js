@@ -36,7 +36,7 @@ const AddInventoryPage = ({
             })}
           </select>
           <br />
-          {moveName ? (
+          {moveList ? (
             <button onClick={handleAddItem} className="moveSubmit">
               Submit
             </button>
@@ -54,7 +54,7 @@ const AddInventoryPage = ({
           {items &&
             items.slice(items.length - 10, items.length).map((item) => (
               <li className="recentlyAdded" key={item.name}>
-                <span>{item.name}</span> added to{" "}
+                <span>{item.itemName}</span> added to{" "}
                 <span>box {item.boxNumber}</span> for the{" "}
                 <span>{item.moveName}</span> move on{" "}
                 {new Date(item.dateAdded).toLocaleDateString()}
