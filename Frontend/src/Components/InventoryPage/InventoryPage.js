@@ -33,7 +33,7 @@ const InventoryPage = ({ moveList, itemList }) => {
             {itemList &&
               itemList.map((item) => {
                 return (
-                  <tr key={item.name}>
+                  <tr key={`${item.name}${item.moveName}`}>
                     <td>{item.moveName}</td>
                     <td>{item.name}</td>
                     <td>{item.boxNumber}</td>

@@ -121,10 +121,12 @@ module.exports = function (app) {
       (user) => {
         const findMove = () => {
           for (let i = 0; i < user.move.length; i++) {
-            if (user.move[i].name === req.body.moveName) {
-              return i;
-            } else {
-              res.send("Can't find move");
+            try {
+              if (user.move[i].name === req.body.moveName) {
+                return i;
+              }
+            } catch (err) {
+              res.send(err);
             }
           }
         };
@@ -134,12 +136,16 @@ module.exports = function (app) {
             boxNumber: req.body.boxNumber,
             items: [],
           });
+          user.move[correctMove].boxNumberTotal =
+            user.move[correctMove].boxNumberTotal + 1;
         }
 
         const correctBox = req.body.boxNumber - 1;
         const item = {
           itemName: req.body.name,
           dateAdded: req.body.dateAdded,
+          boxNumber: req.body.boxNumber,
+          moveName: req.body.moveName,
         };
 
         user.move[correctMove].boxes[correctBox].items.push(item);

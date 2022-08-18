@@ -33,6 +33,22 @@ function App() {
       .then((profile) => {
         setUserProfile(profile);
         setMoveList(profile.move);
+        let total = 0;
+        for (let i = 0; i < profile.move.length; i++) {
+          total = profile.move[i].boxNumberTotal + total;
+        }
+        setAccountTotalBoxes(total);
+        let fullItemList = [];
+        //will refactor this code later. works for now.
+        for (let i = 0; i < profile.move.length; i++) {
+          for (let j = 0; j < profile.move[i].boxes.length; j++) {
+            for (let k = 0; k < profile.move[i].boxes[j].items.length; k++) {
+              fullItemList.push(profile.move[i].boxes[j].items[k]);
+            }
+          }
+        }
+        setItemList(fullItemList);
+        console.log(fullItemList);
       });
   };
 
@@ -47,8 +63,6 @@ function App() {
       dateAdded: new Date(),
     };
 
-    setItemList((prevState) => [...prevState, itemInfo]);
-
     await fetch("http://localhost:3001/additem", {
       method: "POST",
       headers: {
@@ -56,6 +70,8 @@ function App() {
       },
       body: JSON.stringify(itemInfo),
     }).then((data) => data.json());
+
+    searchUser();
   };
 
   const handleAddMove = async () => {
@@ -75,6 +91,8 @@ function App() {
       },
       body: JSON.stringify(moveInfo),
     }).then((data) => data.json());
+
+    searchUser();
   };
 
   const handleLogoutSubmit = async () => {

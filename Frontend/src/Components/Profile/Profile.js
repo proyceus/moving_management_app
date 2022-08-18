@@ -19,7 +19,7 @@ const Profile = ({
           <p>Welcome back, {userProfile && userProfile.username}</p>
           <div className="userData">
             <p>Current items in inventory: {itemList.length}</p>
-            <p>Current number of boxes: {accountTotalBoxes}</p>
+            <p>Total number of boxes: {accountTotalBoxes}</p>
           </div>
         </div>
       </div>

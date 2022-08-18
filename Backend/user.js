@@ -24,6 +24,8 @@ const User = new Schema({
             {
               itemName: String,
               dateAdded: Date,
+              boxNumber: Number,
+              moveName: String,
             },
           ],
         },
