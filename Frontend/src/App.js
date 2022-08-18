@@ -48,7 +48,8 @@ function App() {
           }
         }
         setItemList(fullItemList);
-        console.log(fullItemList);
+        console.log(itemList);
+        console.log(moveList);
       });
   };
 

@@ -29,7 +29,7 @@ const AddInventoryPage = ({
           >
             {moveList.map((item) => {
               return (
-                <option value={item.name} key={item.name}>
+                <option value={item.name} key={item._id}>
                   {item.name}
                 </option>
               );
@@ -53,7 +53,7 @@ const AddInventoryPage = ({
         <ul>
           {items &&
             items.slice(items.length - 10, items.length).map((item) => (
-              <li className="recentlyAdded">
+              <li className="recentlyAdded" key={item.name}>
                 <span>{item.name}</span> added to{" "}
                 <span>box {item.boxNumber}</span> for the{" "}
                 <span>{item.moveName}</span> move on{" "}
