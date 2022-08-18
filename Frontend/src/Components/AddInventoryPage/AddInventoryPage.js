@@ -53,7 +53,7 @@ const AddInventoryPage = ({
         <ul>
           {items &&
             items.slice(items.length - 10, items.length).map((item) => (
-              <li>
+              <li className="recentlyAdded">
                 <span>{item.name}</span> added to{" "}
                 <span>box {item.boxNumber}</span> for the{" "}
                 <span>{item.moveName}</span> move on{" "}

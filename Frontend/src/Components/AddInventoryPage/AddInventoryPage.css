@@ -38,3 +38,7 @@
 .itemList {
     width: 50%;
 }
+
+.recentlyAdded {
+    list-style-type: square;
+}
