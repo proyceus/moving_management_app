@@ -36,17 +36,26 @@ function App() {
       });
   };
 
-  const handleAddItem = (e) => {
+  const handleAddItem = async (e) => {
     e.preventDefault();
 
     const itemInfo = {
       name: item,
       boxNumber: box,
       moveName: moveName,
-      dateAdded: Date(),
+      _id: userProfile._id,
+      dateAdded: new Date(),
     };
 
     setItemList((prevState) => [...prevState, itemInfo]);
+
+    await fetch("http://localhost:3001/additem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(itemInfo),
+    }).then((data) => data.json());
   };
 
   const handleAddMove = async () => {

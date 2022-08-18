@@ -116,6 +116,47 @@ module.exports = function (app) {
     );
   });
 
+  app.post("/additem", (req, res, next) => {
+    User.findById(req.body._id).then(
+      (user) => {
+        const findMove = () => {
+          for (let i = 0; i < user.move.length; i++) {
+            if (user.move[i].name === req.body.moveName) {
+              return i;
+            } else {
+              res.send("Can't find move");
+            }
+          }
+        };
+        const correctMove = findMove();
+        if (user.move[correctMove].boxes.length < req.body.boxNumber) {
+          user.move[correctMove].boxes.push({
+            boxNumber: req.body.boxNumber,
+            items: [],
+          });
+        }
+
+        const correctBox = req.body.boxNumber - 1;
+        const item = {
+          itemName: req.body.name,
+          dateAdded: req.body.dateAdded,
+        };
+
+        user.move[correctMove].boxes[correctBox].items.push(item);
+
+        user.save((err, user) => {
+          if (err) {
+            res.statusCode = 500;
+            res.send(err);
+          } else {
+            res.send({ success: true });
+          }
+        });
+      },
+      (err) => next(err)
+    );
+  });
+
   app.post("/refreshToken", (req, res, next) => {
     const { signedCookies = {} } = req;
     const { refreshToken } = signedCookies;
