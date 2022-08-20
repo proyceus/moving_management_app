@@ -48,8 +48,6 @@ function App() {
           }
         }
         setItemList(fullItemList);
-        console.log(itemList);
-        console.log(moveList);
       });
   };
 
@@ -111,17 +109,6 @@ function App() {
   useEffect(() => {
     searchUser();
   }, [userToken]);
-
-  /*need to fix this area so that the number of totalBoxes shows up*/
-  // useEffect(() => {
-  //   let totalBoxes = 0;
-
-  //   for (let i = 0; i < userProfile.move.length; i++) {
-  //     totalBoxes = totalBoxes + userProfile.move[i].totalBoxNumber;
-  //   }
-
-  //   setAccountTotalBoxes(totalBoxes);
-  // }, [userProfile]);
 
   if (!userToken.token) {
     return (

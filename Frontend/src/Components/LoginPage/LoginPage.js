@@ -11,6 +11,8 @@ const LoginPage = ({ setUserToken, userToken, searchUser }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
+      credentials: "include",
       body: JSON.stringify(credentials),
     })
       .then((data) => data.json())
@@ -25,6 +27,7 @@ const LoginPage = ({ setUserToken, userToken, searchUser }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(credentials),
     })
       .then((data) => data.json())
