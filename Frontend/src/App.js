@@ -120,6 +120,17 @@ function App() {
     );
   }
 
+  const currentToken = document.cookie.split("=")[1].slice(4);
+
+  const checkToken = () => {
+    console.log(currentToken, "||||||", userToken.token);
+    if (currentToken === userToken.token) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -136,7 +147,7 @@ function App() {
               <Link to="inventory" className="navlinks">
                 My Inventory
               </Link>
-              <button type="submit" onClick={() => console.log(userToken)}>
+              <button type="submit" onClick={() => console.log(checkToken())}>
                 Clicky
               </button>
               <button type="submit" onClick={() => console.log(userProfile)}>

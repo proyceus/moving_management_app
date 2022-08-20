@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const dev = process.env.NODE_ENV !== "production";
 
 exports.COOKIE_OPTIONS = {
-  httpOnly: true,
+  httpOnly: false,
   //since local host is not having https protocol, secure cookies do not work correctly (in postman)
   secure: !dev,
   signed: true,
