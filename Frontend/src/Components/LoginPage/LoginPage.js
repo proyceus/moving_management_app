@@ -1,24 +1,17 @@
 import "./LoginPage.css";
 import { useState } from "react";
 
-const LoginPage = ({ setUserToken, userToken, searchUser }) => {
+const LoginPage = ({
+  setUserToken,
+  userToken,
+  searchUser,
+  loginWithRedirect,
+}) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const loginUser = async (credentials) => {
-    return fetch("http://localhost:3001/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    })
-      .then((data) => data.json())
-      .then((items) => {
-        setUserToken(items);
-      });
+  const loginUser = () => {
+    loginWithRedirect();
   };
 
   const signUpUser = async (credentials) => {

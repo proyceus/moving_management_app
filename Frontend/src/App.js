@@ -8,6 +8,7 @@ import {
 } from "./Components";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   const [itemList, setItemList] = useState([]);
@@ -18,6 +19,7 @@ function App() {
   const [moveDate, setMoveDate] = useState("");
   const [accountTotalBoxes, setAccountTotalBoxes] = useState(0);
   const [userToken, setUserToken] = useState({});
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const [userProfile, setUserProfile] = useState();
 
@@ -94,42 +96,23 @@ function App() {
     searchUser();
   };
 
-  const handleLogoutSubmit = async () => {
-    await fetch("http://localhost:3001/logout", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${userToken.token}`,
-      },
-    }).then((data) => data.json());
-
-    setUserProfile({});
-    setUserToken({});
-  };
-
   useEffect(() => {
-    searchUser();
-  }, [userToken]);
+    if (isAuthenticated) {
+      searchUser();
+    }
+  });
 
-  if (!userToken.token) {
+  if (!isAuthenticated) {
     return (
       <LoginPage
         userToken={userToken}
         setUserToken={setUserToken}
         searchUser={searchUser}
+        loginWithRedirect={loginWithRedirect}
+        isAuthenticated={isAuthenticated}
       />
     );
   }
-
-  const currentToken = document.cookie.split("=")[1].slice(4);
-
-  const checkToken = () => {
-    console.log(currentToken, "||||||", userToken.token);
-    if (currentToken === userToken.token) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   return (
     <div className="App">
@@ -147,9 +130,6 @@ function App() {
               <Link to="inventory" className="navlinks">
                 My Inventory
               </Link>
-              <button type="submit" onClick={() => console.log(checkToken())}>
-                Clicky
-              </button>
               <button type="submit" onClick={() => console.log(userProfile)}>
                 Profile
               </button>
@@ -159,7 +139,7 @@ function App() {
               <button type="submit" onClick={() => console.log(moveList)}>
                 Move List
               </button>
-              <button type="submit" onClick={handleLogoutSubmit}>
+              <button type="submit" onClick={console.log("Logout")}>
                 Logout
               </button>
             </>
