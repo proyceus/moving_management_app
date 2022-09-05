@@ -39,8 +39,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Import Express routes
-require("./routes/userRoutes")(app);
+// // Import Express routes
+// require("./routes/userRoutes")(app);
 
 // Start Express Server
 const port = process.env.PORT || 3001;

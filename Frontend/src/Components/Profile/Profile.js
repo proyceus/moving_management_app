@@ -16,7 +16,7 @@ const Profile = ({
       <div className="profileTitle">
         <h1 className="profileTitle">Profile Page</h1>
         <div className="userInfo">
-          <p>Welcome back, {userProfile && userProfile.username}</p>
+          <p>Welcome back, {userProfile && userProfile.email}</p>
           <div className="userData">
             <p>Current items in inventory: {itemList.length}</p>
             <p>Total number of boxes: {accountTotalBoxes}</p>

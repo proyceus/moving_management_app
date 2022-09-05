@@ -19,38 +19,45 @@ function App() {
   const [moveDate, setMoveDate] = useState("");
   const [accountTotalBoxes, setAccountTotalBoxes] = useState(0);
   const [userToken, setUserToken] = useState({});
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
   const [userProfile, setUserProfile] = useState();
 
   const searchUser = async () => {
-    console.log("searched");
-    await fetch("http://localhost:3001/me", {
+    // console.log("searched");
+    // await fetch("http://localhost:3001/me", {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: `Bearer ${userToken.token}`,
+    //   },
+    // })
+    //   .then((data) => data.json())
+    //   .then((profile) => {
+    //     setUserProfile(profile);
+    //     setMoveList(profile.move);
+    //     let total = 0;
+    //     for (let i = 0; i < profile.move.length; i++) {
+    //       total = profile.move[i].boxNumberTotal + total;
+    //     }
+    //     setAccountTotalBoxes(total);
+    //     let fullItemList = [];
+    //     //will refactor this code later. works for now.
+    //     for (let i = 0; i < profile.move.length; i++) {
+    //       for (let j = 0; j < profile.move[i].boxes.length; j++) {
+    //         for (let k = 0; k < profile.move[i].boxes[j].items.length; k++) {
+    //           fullItemList.push(profile.move[i].boxes[j].items[k]);
+    //         }
+    //       }
+    //     }
+    //     setItemList(fullItemList);
+    //   });
+    await fetch(`http://localhost:3001/me?email=${user.email}}`, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${userToken.token}`,
-      },
     })
       .then((data) => data.json())
-      .then((profile) => {
-        setUserProfile(profile);
-        setMoveList(profile.move);
-        let total = 0;
-        for (let i = 0; i < profile.move.length; i++) {
-          total = profile.move[i].boxNumberTotal + total;
-        }
-        setAccountTotalBoxes(total);
-        let fullItemList = [];
-        //will refactor this code later. works for now.
-        for (let i = 0; i < profile.move.length; i++) {
-          for (let j = 0; j < profile.move[i].boxes.length; j++) {
-            for (let k = 0; k < profile.move[i].boxes[j].items.length; k++) {
-              fullItemList.push(profile.move[i].boxes[j].items[k]);
-            }
-          }
-        }
-        setItemList(fullItemList);
-      });
+      .then((profile) => console.log(profile));
+
+    console.log(user);
   };
 
   const handleAddItem = async (e) => {
@@ -79,7 +86,7 @@ function App() {
     const moveInfo = {
       name: moveName,
       moveDate,
-      _id: userProfile._id,
+      email: user.email,
       boxNumberTotal: 1,
     };
 
@@ -98,7 +105,7 @@ function App() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      searchUser();
+      console.log("Authenticated");
     }
   });
 
@@ -139,7 +146,7 @@ function App() {
               <button type="submit" onClick={() => console.log(moveList)}>
                 Move List
               </button>
-              <button type="submit" onClick={console.log("Logout")}>
+              <button type="submit" onClick={() => logout()}>
                 Logout
               </button>
             </>

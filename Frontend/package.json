@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -24,7 +25,7 @@
       "react-app/jest"
     ]
   },
-  "proxy" : "http://localhost:3001",
+  "proxy": "http://localhost:3001",
   "browserslist": {
     "production": [
       ">0.2%",
