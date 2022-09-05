@@ -109,6 +109,14 @@ function App() {
     }
   });
 
+  const handleTest = async () => {
+    await fetch("http//localhost:3001/test?email=test@hotmail.com", {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((x) => console.log(x));
+  };
+
   if (!isAuthenticated) {
     return (
       <LoginPage
@@ -148,6 +156,9 @@ function App() {
               </button>
               <button type="submit" onClick={() => logout()}>
                 Logout
+              </button>
+              <button type="submit" onClick={handleTest}>
+                Test
               </button>
             </>
           ) : (

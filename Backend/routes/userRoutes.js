@@ -8,6 +8,11 @@ module.exports = function (app) {
   //   });
   // });
 
+  app.get("/test", (req, res) => {
+    const x = User.findOne({ email: req.query.email });
+    res.send(x);
+  });
+
   app.post("/addmove", (req, res, next) => {
     const move = {
       name: req.body.name,
