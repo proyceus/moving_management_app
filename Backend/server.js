@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./user");
-const UserDetails = require("./userDetails");
 
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });

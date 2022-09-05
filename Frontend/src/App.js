@@ -25,11 +25,8 @@ function App() {
 
   const searchUser = async () => {
     // console.log("searched");
-    // await fetch("http://localhost:3001/me", {
+    // await fetch(`http://localhost:3001/user?email=${user.email}`, {
     //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${userToken.token}`,
-    //   },
     // })
     //   .then((data) => data.json())
     //   .then((profile) => {
@@ -51,13 +48,11 @@ function App() {
     //     }
     //     setItemList(fullItemList);
     //   });
-    await fetch(`http://localhost:3001/me?email=${user.email}}`, {
+    await fetch(`http://localhost:3001/user?email=${user.email}`, {
       method: "GET",
     })
       .then((data) => data.json())
-      .then((profile) => console.log(profile));
-
-    console.log(user);
+      .then((user) => console.log(user));
   };
 
   const handleAddItem = async (e) => {
@@ -92,7 +87,7 @@ function App() {
 
     setMoveList((original) => [...original, moveInfo]);
 
-    await fetch("http://localhost:3001/addmove", {
+    await fetch(`http://localhost:3001/addmove`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,22 +95,14 @@ function App() {
       body: JSON.stringify(moveInfo),
     }).then((data) => data.json());
 
-    searchUser();
+    // searchUser();
   };
 
   useEffect(() => {
     if (isAuthenticated) {
       console.log("Authenticated");
     }
-  });
-
-  const handleTest = async () => {
-    await fetch("http//localhost:3001/test?email=test@hotmail.com", {
-      method: "GET",
-    })
-      .then((data) => data.json())
-      .then((x) => console.log(x));
-  };
+  }, [isAuthenticated]);
 
   if (!isAuthenticated) {
     return (
@@ -157,7 +144,7 @@ function App() {
               <button type="submit" onClick={() => logout()}>
                 Logout
               </button>
-              <button type="submit" onClick={handleTest}>
+              <button type="submit" onClick={() => console.log("Hi")}>
                 Test
               </button>
             </>
