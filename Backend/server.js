@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./user");
+const UserDetails = require("./userDetails");
 
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
@@ -40,7 +41,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // // Import Express routes
-// require("./routes/userRoutes")(app);
+require("./routes/userRoutes")(app);
 
 // Start Express Server
 const port = process.env.PORT || 3001;
