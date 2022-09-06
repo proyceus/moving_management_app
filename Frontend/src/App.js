@@ -24,35 +24,34 @@ function App() {
   const [userProfile, setUserProfile] = useState();
 
   const searchUser = async () => {
-    // console.log("searched");
-    // await fetch(`http://localhost:3001/user?email=${user.email}`, {
-    //   method: "GET",
-    // })
-    //   .then((data) => data.json())
-    //   .then((profile) => {
-    //     setUserProfile(profile);
-    //     setMoveList(profile.move);
-    //     let total = 0;
-    //     for (let i = 0; i < profile.move.length; i++) {
-    //       total = profile.move[i].boxNumberTotal + total;
-    //     }
-    //     setAccountTotalBoxes(total);
-    //     let fullItemList = [];
-    //     //will refactor this code later. works for now.
-    //     for (let i = 0; i < profile.move.length; i++) {
-    //       for (let j = 0; j < profile.move[i].boxes.length; j++) {
-    //         for (let k = 0; k < profile.move[i].boxes[j].items.length; k++) {
-    //           fullItemList.push(profile.move[i].boxes[j].items[k]);
-    //         }
-    //       }
-    //     }
-    //     setItemList(fullItemList);
-    //   });
+    console.log("searched");
     await fetch(`http://localhost:3001/user?email=${user.email}`, {
       method: "GET",
     })
       .then((data) => data.json())
-      .then((user) => console.log(user));
+      .then((profile) => {
+        setUserProfile({
+          email: profile.email,
+          move: profile.move,
+          updatedAt: profile.updatedAt,
+        });
+        setMoveList(profile.move);
+        let total = 0;
+        for (let i = 0; i < profile.move.length; i++) {
+          total = profile.move[i].boxNumberTotal + total;
+        }
+        setAccountTotalBoxes(total);
+        let fullItemList = [];
+        //will refactor this code later. works for now.
+        for (let i = 0; i < profile.move.length; i++) {
+          for (let j = 0; j < profile.move[i].boxes.length; j++) {
+            for (let k = 0; k < profile.move[i].boxes[j].items.length; k++) {
+              fullItemList.push(profile.move[i].boxes[j].items[k]);
+            }
+          }
+        }
+        setItemList(fullItemList);
+      });
   };
 
   const handleAddItem = async (e) => {
@@ -62,7 +61,7 @@ function App() {
       name: item,
       boxNumber: box,
       moveName: moveName,
-      _id: userProfile._id,
+      email: userProfile.email,
       dateAdded: new Date(),
     };
 
@@ -102,7 +101,7 @@ function App() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("Authenticated");
+      searchUser();
     }
   }, [isAuthenticated]);
 
