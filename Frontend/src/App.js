@@ -145,7 +145,6 @@ function App() {
             <Link to="inventory" className="navlinks">
               My Inventory
             </Link>
-            <button onClick={() => console.log(itemList)}>Items</button>
           </>
         </div>
         <button type="submit" onClick={logout} className="logoutButton">
