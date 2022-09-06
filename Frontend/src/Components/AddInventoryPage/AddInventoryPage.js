@@ -27,6 +27,7 @@ const AddInventoryPage = ({
               setMoveName(e.target.value);
             }}
           >
+            <option></option>
             {moveList.map((item, index) => {
               return (
                 <option value={item.name} key={index}>

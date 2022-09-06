@@ -35,11 +35,13 @@ const Profile = ({
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Royce's</td>
-                <td>Chair</td>
-                <td>3</td>
-              </tr>
+              {itemList.slice(0, 5).map((item, index) => (
+                <tr key={index}>
+                  <td>{item.moveName}</td>
+                  <td>{item.itemName}</td>
+                  <td>{item.boxNumber}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
