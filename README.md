@@ -1,4 +1,4 @@
-Creating a dummy app to help move managers easily keep track of items/where they are being stored.
+Created a dummy app to help move managers easily keep track of items/where they are being stored.
 
 A user first needs to login using Auth0.
 
