@@ -3,11 +3,10 @@
     flex-direction: column;
     align-items: center;
     color: #fff;
-}
-
-body {
+    height: 100vh;
     background-color: #000;
 }
+
 
 .button {
     padding: 20px 60px 20px 60px;
