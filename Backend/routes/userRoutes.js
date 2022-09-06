@@ -70,6 +70,7 @@ module.exports = function (app) {
           dateAdded: req.body.dateAdded,
           boxNumber: req.body.boxNumber,
           moveName: req.body.moveName,
+          itemNumber: req.body.itemNumber,
         };
 
         user.move[correctMove].boxes[correctBox].items.push(item);

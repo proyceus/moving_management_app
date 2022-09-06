@@ -19,6 +19,7 @@ const User = new Schema({
               dateAdded: Date,
               boxNumber: Number,
               moveName: String,
+              itemNumber: Number,
             },
           ],
         },

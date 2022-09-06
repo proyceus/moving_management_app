@@ -13,6 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   const [itemList, setItemList] = useState([]);
+  const [totalItems, setTotalItems] = useState(1);
   const [item, setItem] = useState("");
   const [box, setBox] = useState("");
   const [moveName, setMoveName] = useState("");
@@ -52,6 +53,7 @@ function App() {
           }
         }
         setItemList(fullItemList);
+        setTotalItems(fullItemList.length);
       });
   };
 
@@ -64,6 +66,7 @@ function App() {
       moveName: moveName,
       email: userProfile.email,
       dateAdded: new Date(),
+      itemNumber: totalItems,
     };
 
     await fetch("http://localhost:3001/additem", {
@@ -73,6 +76,8 @@ function App() {
       },
       body: JSON.stringify(itemInfo),
     }).then((data) => data.json());
+
+    setTotalItems((prevState) => prevState + 1);
 
     searchUser();
   };
@@ -96,8 +101,6 @@ function App() {
     })
       .then((data) => data.json())
       .then((user) => console.log(user));
-
-    // searchUser();
   };
 
   useEffect(() => {
