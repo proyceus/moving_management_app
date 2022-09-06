@@ -68,3 +68,7 @@
   height:100%;
   position:relative;
 }
+
+.loading {
+  text-align: center;
+}

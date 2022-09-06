@@ -16,10 +16,10 @@ const InventoryPage = ({ moveList, itemList }) => {
               setFilteredSelect(e.target.value);
             }}
           >
-            <option value=""></option>
-            {moveList.map((item) => {
+            <option value="">All Moves</option>
+            {moveList.map((item, index) => {
               return (
-                <option key={item.name} value={item.name}>
+                <option key={index} value={item.name}>
                   {item.name}
                 </option>
               );

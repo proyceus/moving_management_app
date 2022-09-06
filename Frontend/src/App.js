@@ -8,6 +8,7 @@ import {
 } from "./Components";
 import { Routes, Route, Link } from "react-router-dom";
 import logo from "./images/Moova.png";
+import loadingGif from "./images/loading.gif";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
   const [moveDate, setMoveDate] = useState("");
   const [accountTotalBoxes, setAccountTotalBoxes] = useState(0);
   const [userToken, setUserToken] = useState({});
-  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, user, isLoading } =
+    useAuth0();
 
   const [userProfile, setUserProfile] = useState();
 
@@ -104,6 +106,14 @@ function App() {
       searchUser();
     }
   }, [isAuthenticated]);
+
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <img src={loadingGif} alt="loading" />
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (

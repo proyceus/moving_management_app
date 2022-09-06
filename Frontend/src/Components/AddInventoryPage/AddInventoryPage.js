@@ -27,9 +27,9 @@ const AddInventoryPage = ({
               setMoveName(e.target.value);
             }}
           >
-            {moveList.map((item) => {
+            {moveList.map((item, index) => {
               return (
-                <option value={item.name} key={item._id}>
+                <option value={item.name} key={index}>
                   {item.name}
                 </option>
               );
@@ -52,8 +52,8 @@ const AddInventoryPage = ({
         <h1>Recently added</h1>
         <ul>
           {items &&
-            items.slice(items.length - 10, items.length).map((item) => (
-              <li className="recentlyAdded" key={item.name}>
+            items.slice(items.length - 10, items.length).map((item, index) => (
+              <li className="recentlyAdded" key={index}>
                 <span>{item.itemName}</span> added to{" "}
                 <span>box {item.boxNumber}</span> for the{" "}
                 <span>{item.moveName}</span> move on{" "}
