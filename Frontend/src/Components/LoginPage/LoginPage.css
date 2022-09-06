@@ -2,4 +2,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #fff;
 }
+
+body {
+    background-color: #000;
+}
+
+.button {
+    padding: 20px 60px 20px 60px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    background-color: #e574cc;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 50px;
+  }
+  
+  .button:hover {
+    background-color: #e574cccc;
+  }

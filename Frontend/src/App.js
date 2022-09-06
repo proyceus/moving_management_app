@@ -26,7 +26,6 @@ function App() {
   const [userProfile, setUserProfile] = useState();
 
   const searchUser = async () => {
-    console.log("searched");
     await fetch(`http://localhost:3001/user?email=${user.email}`, {
       method: "GET",
     })
@@ -104,6 +103,7 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       searchUser();
+      console.log("loading details");
     }
   }, [isAuthenticated]);
 
@@ -132,44 +132,21 @@ function App() {
       <nav className="navbar">
         <img src={logo} alt="logo" className="logo"></img>
         <div className="navbarlinks">
-          {userToken ? (
-            <>
-              <Link to="/" className="navlinks">
-                Home
-              </Link>
-              <Link to="additem" className="navlinks">
-                Add Items
-              </Link>
-              <Link to="inventory" className="navlinks">
-                My Inventory
-              </Link>
-              <button type="submit" onClick={() => console.log(userProfile)}>
-                Profile
-              </button>
-              <button type="submit" onClick={searchUser}>
-                Search
-              </button>
-              <button type="submit" onClick={() => console.log(moveList)}>
-                Move List
-              </button>
-              <button type="submit" onClick={() => logout()}>
-                Logout
-              </button>
-              <button type="submit" onClick={() => console.log("Hi")}>
-                Test
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="login" className="navlinks">
-                Login
-              </Link>
-              <Link to="signup" className="navlinks">
-                Sign Up
-              </Link>
-            </>
-          )}
+          <>
+            <Link to="/" className="navlinks">
+              Home
+            </Link>
+            <Link to="additem" className="navlinks">
+              Add Items
+            </Link>
+            <Link to="inventory" className="navlinks">
+              My Inventory
+            </Link>
+          </>
         </div>
+        <button type="submit" onClick={logout} className="logoutButton">
+          Logout
+        </button>
       </nav>
 
       <Routes>
