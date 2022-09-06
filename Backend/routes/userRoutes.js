@@ -1,5 +1,4 @@
 const User = require("../user");
-const mongoose = require("mongoose");
 
 module.exports = function (app) {
   // app.get("/me", (req, res, next) => {
@@ -9,7 +8,9 @@ module.exports = function (app) {
   // });
 
   app.get("/user", (req, res) => {
-    User.findOne({ email: req.query.email }).then((data) => res.send(data));
+    User.findOne({ email: req.query.email }).then((data) =>
+      res.send(data.move)
+    );
   });
 
   app.post("/addmove", (req, res, next) => {
@@ -31,13 +32,11 @@ module.exports = function (app) {
 
         user.save((err, user) => {
           if (err) {
-            res.statusCode = 500;
             res.send(err);
           } else {
             res.send({ success: true });
           }
         });
-        res.send(user);
       },
       (err) => next(err)
     );

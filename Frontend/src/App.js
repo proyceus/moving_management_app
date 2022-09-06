@@ -93,7 +93,9 @@ function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(moveInfo),
-    }).then((data) => data.json());
+    })
+      .then((data) => data.json())
+      .then((user) => console.log(user));
 
     // searchUser();
   };
